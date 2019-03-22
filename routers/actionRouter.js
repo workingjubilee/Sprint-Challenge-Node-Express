@@ -1,6 +1,6 @@
 const express = require("express");
 
-const Actions = require('../data/helpers/projectModel.js')
+const Actions = require('../data/helpers/actionModel.js')
 
 const router = express.Router();
 
@@ -13,11 +13,41 @@ const router = express.Router();
 // | notes       | string    | no size limit, required. Used to record additional notes or requirements to complete the action. |
 // | completed   | boolean   | used to indicate if the action has been completed, not required                                  |
 
-// // Crud
-// router.post();
+// Crud
+router.post('/', async (req, res) => {
+  const { project_id } = req.body;
+  const { description } = req.body; // 128 character limit
+  const { notes } = req.body; // no size limit
+  const { completed } = req.body || false;
+  const action = { project_id, description, notes, completed };
 
-// // cRud
-// router.get();
+  if ( !project_id || !description || !notes ) {
+    res.status(400).send("Action needs project_id as integer and text for description and notes.\n You may include completed as a true or false.")
+  } else {
+
+    try {
+      const newAction = await Actions.insert(action);
+      res.status(200).json(newAction);
+
+    } catch {
+      res.status(500).send("Post request failed.")
+    }
+
+  };
+});
+
+// cRud
+router.get('/:id', async (req,res) => {
+  const { id } = req.params;
+
+  try {
+    const action = await Actions.get(id);
+    res.status(200).json(action);
+  } catch {
+    res.status(500).send("Get request failed.")
+  }
+
+});
 
 // // crUd
 // router.put();
