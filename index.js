@@ -13,10 +13,10 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/api/project', projectRouter);
-server.use('/api/action', actionRouter);
+server.use('/api/projects', projectRouter);
+server.use('/api/actions', actionRouter);
 
-server.get('/', (req, res) => {
+server.get('/', async (req, res) => {
   res.status(200).send(`
     RUN, COWARD.
     I AM... SINISTAR.
