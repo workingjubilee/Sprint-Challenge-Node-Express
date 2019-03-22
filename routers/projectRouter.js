@@ -56,6 +56,18 @@ router.get('/:id', async (req,res) => {
 
 });
 
+router.get('/:id/actions', async (req,res) => {
+  const { id } = req.params;
+
+  try {
+    const actions = await Projects.getProjectActions(id);
+    res.status(200).json(actions);
+  } catch {
+    res.status(500).send("Get request failed.")
+  }
+
+});
+
 // crUd
 router.put('/:id', async (req,res) => {
   const { id } = req.params;
