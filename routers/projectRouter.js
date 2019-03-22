@@ -56,7 +56,7 @@ router.get('/:id', async (req,res) => {
 
 });
 
-// // crUd
+// crUd
 router.put('/:id', async (req,res) => {
   const { id } = req.params;
   const { name, description } = req.body;
@@ -68,17 +68,33 @@ router.put('/:id', async (req,res) => {
   } else {
 
     try {
-      const project = await Projects.update(id, changes);
+      const changedProject = await Projects.update(id, changes);
 
-      res.status(200).json(project);
+      res.status(200).json(changedProject);
     } catch {
-      res.status(500).send("Put request failed.")
+      res.status(404).send("Project not found and updated.")
     }
 
   }
 });
 
-// // cruD
-// router.delete();
+// cruD
+router.delete('/:id', async (req,res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedProject = await Projects.remove(id);
+
+    if (deletedProject === 0) {
+      res.status(404).send("Deletion target not found.")
+    }
+    else {
+      res.status(200).json(deletedProject);
+    }
+  } catch {
+    res.status(404).send("Deletion target not found.")
+  }
+
+});
 
 module.exports = router;
