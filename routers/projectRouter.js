@@ -11,16 +11,16 @@ const router = express.Router();
 // | description | string    | required.                                                                   |
 // | completed   | boolean   | used to indicate if the project has been completed, not required            |
 
-// Crud
-router.post();
+// // Crud
+// router.post();
 
-// cRud
-router.get();
+// // cRud
+// router.get();
 
-// crUd
-router.put();
+// // crUd
+// router.put();
 
-// cruD
-router.delete();
+// // cruD
+// router.delete();
 
 module.exports = router;
