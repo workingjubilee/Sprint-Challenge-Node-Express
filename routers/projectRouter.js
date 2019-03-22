@@ -13,18 +13,20 @@ const router = express.Router();
 
 // // Crud
 router.post('/', async (req, res) => {
-  const { name, description, completed } = req.body;
+  const { name, description } = req.body;
+  const { completed } = req.body || false;
+  const project = { name, description, completed };
 
   if ( !name || !description ) {
-    res.status(400).send("Project needs name and description text. You may include completed as a true or false.")
+    res.status(400).send("Project needs name and description text.\n You may include completed as a true or false.")
   } else {
 
     try {
-      const newProject = await Projects.insert({ name, description, completed });
+      const newProject = await Projects.insert(project);
       res.status(200).json(newProject);
 
     } catch {
-      res.status(500).send("Request failed.")
+      res.status(500).send("Post request failed.")
     }
 
   };
@@ -37,25 +39,44 @@ router.get('/', async (req,res) => {
     const projectList = await Projects.get();
     res.status(200).json(projectList);
   } catch {
-    res.status(500).send("Request failed.")
+    res.status(500).send("Get request failed.")
   }
 
 });
 
 router.get('/:id', async (req,res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     const project = await Projects.get(id);
     res.status(200).json(project);
   } catch {
-    res.status(500).send("Request failed.")
+    res.status(500).send("Get request failed.")
   }
 
 });
 
 // // crUd
-// router.put();
+router.put('/:id', async (req,res) => {
+  const { id } = req.params;
+  const { name, description } = req.body;
+  const { completed } = req.body || false;
+  const changes = { name, description, completed };
+
+  if ( !name || !description ) {
+    res.status(400).send("Project needs name and description text to update.\n You may include completed as a true or false.")
+  } else {
+
+    try {
+      const project = await Projects.update(id, changes);
+
+      res.status(200).json(project);
+    } catch {
+      res.status(500).send("Put request failed.")
+    }
+
+  }
+});
 
 // // cruD
 // router.delete();
