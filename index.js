@@ -1,5 +1,7 @@
 // play this: https://www.youtube.com/watch?v=d-diB65scQU
 
+// In this challenge, create a web API around the following resources: `Projects` and `Actions`.
+
 // code away!
 
 const express = require("express");
