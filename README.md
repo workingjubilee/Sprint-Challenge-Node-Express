@@ -26,13 +26,26 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+  1) I learned about the Express generator that I'm not supposed to learn until last week, which works a lot like the React CRA, which honestly is because 2) yeah, it is kind of like React, in that it's a library for performing a lot of activities in server handling very quickly by providing some ready-made objects (routers, mostly) with .methods for their usage. And just for good measure, 3) Really conveniently it includes json handling capabilities, but somewhat puzzlingly it doesn't have those built in when you import it, so you have to specifically add and use that, even though a lot of servers require JSON? Sometimes it is unopinionated to a perplexing degree. It doesn't include more advanced things like CORS handling, though, since it's designed to be very lightweight and only include broadly-used stuff.
+
 - [ ] Describe Middleware?
+
+  Middleware was covered in React? Seriously, it is just any kind of program (including just a function) that comes between some data (usually a program itself) and any other kind of program. 
 
 - [ ] Describe a Resource?
 
+  A resource is any kind of data, like our good old friend, the function, made available at an endpoint, which generally we broadcast somewhere on the internet. As classically taught, this is for database access, but it can just be a resource of raw processing power available to do a thing if people make requests to it.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+  res.status(200);
+  the HTTP Status 200 is a generally accepted status code for confirming a request was successful and some action was taken as a result.
+
 - [ ] How can we partition our application into sub-applications?
+
+  Using module.exports = name, and const name = require() as imports. We can break it up by features (e.g. all post-handling functions going into one folder, all user-handling functions going into another) or by types of parts (e.g. all data to be accessed going in to one folder, all routing going into another folder).
+
+
 
 ## Project Setup
 
