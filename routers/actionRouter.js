@@ -22,7 +22,9 @@ router.post('/', async (req, res) => {
   const action = { project_id, description, notes, completed };
 
   if ( !project_id || !description || !notes ) {
-    res.status(400).send("Action needs project_id as integer and text for description and notes.\n You may include completed as a true or false.")
+    res.status(400).send(
+      `Action needs project_id as integer and strings for description and notes.
+      You may include completed as a true or false.`)
   } else {
 
     try {
@@ -34,6 +36,18 @@ router.post('/', async (req, res) => {
     }
 
   };
+});
+
+// cRud
+router.get('/', async (req,res) => {
+
+  try {
+    const action = await Actions.get();
+    res.status(200).json(action);
+  } catch {
+    res.status(500).send("Get request failed.")
+  }
+
 });
 
 // cRud
@@ -59,7 +73,9 @@ router.put('/:id', async (req, res) => {
   const action = { project_id, description, notes, completed };
 
   if ( !project_id || !description || !notes ) {
-    res.status(400).send("Action needs project_id as integer and text for description and notes.\n You may include completed as a true or false.")
+    res.status(400).send(
+      `Action needs project_id as integer and strings for description and notes.
+      You may include completed as a true or false.`)
   } else {
 
     try {
@@ -82,11 +98,10 @@ router.delete('/:id', async (req,res) => {
 
     if (deletedAction === 0) {
       res.status(404).send("Deletion target not found.")
-    }
-    else {
+    } else {
       res.status(200).json(deletedAction);
     }
-    
+
   } catch {
     res.status(404).send("Deletion target not found.")
   }

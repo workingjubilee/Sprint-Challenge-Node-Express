@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
   const project = { name, description, completed };
 
   if ( !name || !description ) {
-    res.status(400).send("Project needs name and description text.\n You may include completed as a true or false.")
+    res.status(400).send("Project needs name and description text.\n You may include completed as a true or false.");
   } else {
 
     try {
@@ -76,7 +76,7 @@ router.put('/:id', async (req,res) => {
   const changes = { name, description, completed };
 
   if ( !name || !description ) {
-    res.status(400).send("Project needs name and description text to update.\n You may include completed as a true or false.")
+    res.status(400).send("Project needs name and description text to update.\nYou may include completed as a true or false.");
   } else {
 
     try {
